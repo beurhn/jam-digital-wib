@@ -1,50 +1,36 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-<meta charset="UTF-8" />
-<title>Jam dan Tanggal Digital WIB</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: transparent; /* transparan */
-    color: #000; /* teks hitam agar terlihat */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  #tanggal {
-    font-size: 24px; /* lebih kecil */
-    margin-bottom: 10px;
-  }
-  #jam {
-    font-size: 36px; /* lebih kecil */
-    font-weight: bold;
-  }
-</style>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+      color: #000; /* Warna teks */
+      font-family: sans-serif;
+      font-size: 24px;
+      text-align: center;
+    }
+    #clock {
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
-  <div id="tanggal"></div>
-  <div id="jam"></div>
+  <div id="clock"></div>
 
-<script>
-function updateWaktu() {
-  const sekarang = new Date();
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const date = now.toLocaleDateString('id-ID', options);
+      const time = now.toLocaleTimeString('id-ID');
 
-  const opsiTanggal = { timeZone: 'Asia/Jakarta', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const tanggalWIB = sekarang.toLocaleDateString('id-ID', opsiTanggal);
+      document.getElementById('clock').innerHTML = `${date}<br>${time}`;
+    }
 
-  const opsiJam = { timeZone: 'Asia/Jakarta', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-  const jamWIB = sekarang.toLocaleTimeString('id-ID', opsiJam);
-
-  document.getElementById('tanggal').textContent = tanggalWIB;
-  document.getElementById('jam').textContent = jamWIB;
-}
-
-setInterval(updateWaktu, 1000);
-updateWaktu();
-</script>
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
 </body>
 </html>
